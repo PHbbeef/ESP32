@@ -1,0 +1,39 @@
+* {
+    padding: 0;
+    margin: 0;
+
+    /* border: 1px solid; */
+
+
+}
+
+body{
+    width: 100%;
+    height: 100%;
+
+    background-image: url(http://cdn-hw-static2.shanhutech.cn/bizhi/staticwp/202403/ca3df897a6574ff1980bbd2c53f001f8--3606440233.jpg);
+    background-size: cover;
+    background-attachment: fixed;  
+}
+
+button{
+    position: absolute;
+    left: 50%;
+    width: 200px;
+    height: 80px;
+    font-size: 30px;
+    margin-top: 10%;
+
+    background-color: transparent;
+    border-left: 0.02em solid transparent;
+    border-right: 0.02em solid transparent;
+    border-top: 0.02em solid transparent;
+    border-bottom: 0.02em solid transparent;
+}
+
+button:hover{
+    border-left: 0.02em solid;
+    border-right: 0.02em solid;
+    border-top: 0.02em solid;
+    border-bottom: 0.02em solid;
+}

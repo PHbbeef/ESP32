@@ -1,4 +1,4 @@
-var status = 0
+var status = 3
 
 var http = require("http"); //创建HTTP对象
 const qurystring = require('querystring')

@@ -6,7 +6,7 @@
 #include <IRsend.h>
 
 int ledpin = 23;  //数据输出阵脚
-int status_air = 0; //开关抓太
+int status_air = 3; //开关抓太
 int khz = 38; //红外频率
 
 //开
@@ -35,7 +35,9 @@ void setup(){
   wifi();
 }
 
+
 void loop(){
+
   if(status_air == 0){
     off();
   }
@@ -45,7 +47,7 @@ void loop(){
 
 
   http();
-  Serial.print(status_air);
+  Serial.print("api状态："+status_air);
 }
 
 
@@ -67,11 +69,16 @@ void wifi(){
 }
 
 void http(){
-  
+  restart:  //api获取错误
   HTTPClient http;  //创建对象http
   http.begin(url);
   int http_code = http.GET();
-  // Serial.print(http_code);
+  Serial.print("请求状态码："+ http_code);
+  if(http_code != 200){
+     http.end();
+     delay(5000);
+     goto restart;  //跳出错误
+  }
   //获取响应正文
   String response = http.getString();
   // Serial.print(response);

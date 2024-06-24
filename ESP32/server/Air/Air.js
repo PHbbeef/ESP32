@@ -1,5 +1,5 @@
-var status_on = 0;
-var url_Air = "http://server.drlihui.eu.org:80/Air"
+var status_on = 0; //0(关)、1(开)、2（停止红外）
+var url_Air = "http://server.drlihui.eu.org:80/apiAir"
 
 function an(){
     if(status_on == 1){

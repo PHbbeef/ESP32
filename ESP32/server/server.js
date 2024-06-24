@@ -9,18 +9,18 @@ const { default: test } = require("node:test");
 var server = http.createServer(function (request, res) {    //'request'请求对象
     // console.log(request);
 
-    if (request.url === "/Air") {
+    if (request.url === "/apiAir") {
         res.writeHead(200, {    //HTTP状态码
             //纯文本
             // "Content-Type":"text/plain"
             "Content-Type": 'application/json'
         })
 
-        var Air = {
+        var apiAir = {
             status,
 
         }
-        res.end(JSON.stringify(Air));
+        res.end(JSON.stringify(apiAir));
     }
     else {
         res.writeHead(404, { "Content-Type": 'text/html' });

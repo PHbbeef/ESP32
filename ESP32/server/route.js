@@ -14,7 +14,7 @@ function route_url(){
         console.log(request.url);
         route_url();
     
-        if(request.url === "/Air"){
+        if(request.url === "/apiAir"){
             res.writeHead(200,{
                 //纯文本
                 // "Content-Type":"text/plain"

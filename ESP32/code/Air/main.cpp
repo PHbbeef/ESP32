@@ -5,8 +5,8 @@
 #include <IRremoteESP8266.h>
 #include <IRsend.h>
 
-int ledpin = 23;  //数据输出阵脚
-int status_air = 3; //开关抓太
+int datapin = 23;  //数据输出引脚
+int status_air = 3; //开关状态
 int khz = 38; //红外频率
 
 //开
@@ -28,7 +28,7 @@ void on();
 void off();
 
 void setup(){
-  pinMode(ledpin,OUTPUT);
+  pinMode(datapin,OUTPUT);
 
   Serial.begin(9600);
 
@@ -47,7 +47,6 @@ void loop(){
 
 
   http();
-  Serial.print("api状态："+status_air);
 }
 
 
@@ -69,15 +68,16 @@ void wifi(){
 }
 
 void http(){
-  restart:  //api获取错误
   HTTPClient http;  //创建对象http
   http.begin(url);
   int http_code = http.GET();
   Serial.print("请求状态码："+ http_code);
+
+  //api获取错误
   if(http_code != 200){
      http.end();
      delay(5000);
-     goto restart;  //跳出错误
+     loop();
   }
   //获取响应正文
   String response = http.getString();
@@ -93,19 +93,41 @@ void http(){
   delay(2000);
 }
 
+void httppost(){
+  HTTPClient http_post;
+  http_post.begin(url);
+
+  //这里POST转换字符串形式
+  String status = String(status_air); 
+  int http_postcode = http_post.POST(status); //发送请求
+
+  if (http_postcode != 200){
+    delay(2000);
+    loop();
+  }
+}
+
+//心跳检测
+void heartbeat(){
+
+}
 
 void on(){
-  IRsend irsend(ledpin);
+  IRsend irsend(datapin);
   irsend.begin(); //初始化红外发射
 
   irsend.sendRaw(ACon, sizeof(ACon) / sizeof(ACon[0]), khz); //发射红外
   delay(2000);
+  status_air = 3;
+  httppost();
 }
 
 void off(){
-  IRsend irsend(ledpin);
+  IRsend irsend(datapin);
   irsend.begin(); //初始化红外发射
 
   irsend.sendRaw(ACoff, sizeof(ACoff) / sizeof(ACoff[0]), khz); //发射红外
   delay(2000);
+  status_air = 3;
+  httppost();
 }

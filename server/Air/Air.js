@@ -1,5 +1,5 @@
 var status_on = 0; //0(关)、1(开)、2（停止红外）
-var url_Air = "http://server.drlihui.eu.org:80/apiAir"
+var url_Air = "http://192.168.1.100:80/apiAir"
 
 function an(){
     if(status_on == 1){
@@ -8,18 +8,20 @@ function an(){
     else{
         status_on = 1
     }
-
-    let xhr = new XMLHttpRequest()
-    xhr.open('post',url_Air)
-    xhr.send(status_on)
 }
 
 function anan(){
 
-    //POST响应
     let xhr = new XMLHttpRequest()
     xhr.open('post',url_Air)
-    xhr.send(3)
+    xhr.send(status_on)
+
+
+
+    //POST响应
+    // let xhr = new XMLHttpRequest()
+    // xhr.open('post',url_Air)
+    // xhr.send(3)
 
 
     //GET请求

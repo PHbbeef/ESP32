@@ -1,4 +1,5 @@
 var status = 3
+var Airheartbeat = 10
 
 var http = require("http"); //创建HTTP对象
 const qurystring = require('querystring')
@@ -18,6 +19,7 @@ var server = http.createServer(function (request, res) {    //'request'请求对
 
         var apiAir = {
             status,
+            Airheartbeat,
 
         }
         res.end(JSON.stringify(apiAir));

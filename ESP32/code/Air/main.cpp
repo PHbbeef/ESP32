@@ -75,7 +75,7 @@ void http(){
 
   //api获取错误
   if(http_code != 200){
-     http.end();
+     status_air = 3;	//这里如果获取失败内容会为空，所以这里设置状态3
      delay(5000);
      loop();
   }
